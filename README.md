@@ -31,10 +31,9 @@ Method | Route | Description
 --- | --- | ---
 `POST` | `/api/register` | Create a user
 `POST` | `/api/login` | Login an already registered user
-`GET` | `/api/apartments` | View all apartments
+`GET` | `/api/user/apartments` | View all apartments
 `GET` | `/api/apartments/:id` | View a single property
 `POST` | `/api/apartments/:apartmentId/reviews` | Create a review for an apartment
-`PUT` | `/api/products/:productId/reviews/:reviewId` | Update the property review
 
 ## Setup
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.

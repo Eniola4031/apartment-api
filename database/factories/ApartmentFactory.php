@@ -25,16 +25,16 @@ class ApartmentFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'description' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
-            'price' => $this-> faker -> price,
-            'landlord_id' => function () {
+            'description' =>$this->faker->sentence($nbWords = 6, $variableNbWords = true),
+            'price' =>$this->faker->price,
+            'landlord_id' =>function () {
                   return factory(LandLord::class)->create()->id
             }
             
         ];
             
     }
-
+}
 
 
 // $factory->define(Apartment::class, function (Faker $faker) {
