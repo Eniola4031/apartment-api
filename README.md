@@ -3,7 +3,7 @@
 ## Introduction
 Apartment API  is a Laravel powered API that allows users to add, view, update and delete apartments Users will also be able to rate, review apartments and the landlords.
 
-![alt text](https://raw.githubusercontent.com/Steelze/product-review-api/master/public/screenshot.jpg)
+![alt text](https://raw.githubusercontent.com/eniola4031/main/apartment-api/public/Screenshot.png)
 
 ## Table of Contents
 1. <a href="#technology-stack">Technology Stack</a>
