@@ -2,6 +2,11 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ApartmentController;
+use App\Http\Controllers\ReviewController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,14 +19,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+ Route::middleware('auth:api')->get('/user', function (Request $request) {
+     return $request->user();
+ });
 // Route::get('me', 'AuthController@me');
 // Route::post('login', 'AuthController@login');
 // Route::post('register', 'AuthController@register');
 // Route::post('logout', 'AuthController@logout');
-Route::apiResource('apartments', 'ApartmentController');
-Route::apiResource('apartments/{apartments}/reviews', 'ReviewController')
-    ->only('store', 'update', 'destroy');
-    Route::get('/user/profile',[UserProfileController::class, 'show'])->name('profile');
+// Route::apiResource('apartments', 'ApartmentController');
+// Route::apiResource('apartments/{apartments}/reviews', 'ReviewController')
+//     ->only('store', 'update', 'destroy');
+
+    Route::post('/user/login',[AuthController::class, 'login'])->name('login');
+    Route::post('/user/register',[AuthController::class, 'register'])->name('register');
+    Route::get('/user/logout',[AuthController::class, 'logout'])->name('logout');
+    Route::apiResource('/apartment',[ApartmentController::class])->name('apartment');
+    Route::apiResource('/apartments/reviews',[ReviewController::class, 'reviews'])->name('reviews');
+
+
+
+

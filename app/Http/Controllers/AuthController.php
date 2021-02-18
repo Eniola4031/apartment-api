@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Hash;
 
 class AuthController extends Controller
 {
@@ -21,34 +23,41 @@ class AuthController extends Controller
         ]);
 
         $user = User::create([
-            'fullname' => $request->name,
+            'fullname' => $request->fullname,
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
-        $token = auth()->login($user);
-        return $this->respondWithToken($token);
-    }
+        $token = $user->createToken('Eniola Password Grant Client')->accessToken;
+        $response = [
+            'token' => $token,
+            'type' => 'Bearer',
+            'merchant' => $user,
+        ];
+        return response()->json($response);    }
 
-    public function login(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|string',
-            'password' => 'required|string',
-        ]);
-        $credentials = $request->only(['email', 'password']);
-        if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Invalid Credentials'], 401);
-        }
-        return $this->respondWithToken($token);
-    }
+    // public function login(Request $request)
+    // {
+    //     $request->validate([
+    //         'email' => 'required|string',
+    //         'password' => 'required|string',
+    //     ]);
+    //     $credentials = $request->only(['email', 'password']);
+    //     if (!auth()->attempt($credentials)) {
+    //         return response()->json(['error' => 'Invalid Credentials'], 401);
+    //     }
+    //     $token = $user->createToken('Token Name')->accessToken;
 
-    protected function respondWithToken($token)
+    //     return $this->respondWithToken($token);
+    // }
+
+
+    protected function respondWithToken($token, $user = null)
     {
         return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'token' => $token,
+            'user' => $user,
         ]);
+    
     }
 
     /**
@@ -70,6 +79,42 @@ class AuthController extends Controller
     {
         auth()->logout();
         return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    public function login(Request $request) {
+        try
+        {
+            $request->validate([
+                'email' => 'required|string',
+                'password' => 'required|string',
+            ]);
+            // $credentials = $request->only(['email', 'password']);
+            // if (!auth()->attempt($credentials)) {
+            //     return response()->json(['error' => 'Invalid Credentials'], 401);
+            // }
+    
+            $user = User::query()
+                ->where('email', $request->input('email'))
+                ->first();
+            if (!$user) {
+                return response()->json([
+                   'message' => "Invalid login credentials",
+                    'status' => Response::HTTP_UNPROCESSABLE_ENTITY
+                ]);
+            }
+
+            if (Hash::check($request->input('password'), $user->password)) {
+                $token = $user->createToken('Eniola Password Grant Client')->accessToken;
+                $response = [
+                    'token' => $token,
+                    'type' => 'Bearer',
+                    'merchant' => $user,
+                ];
+                return response()->json($response);
+            }
+        } catch (\Exception $e) {
+            return $this->exception($e);
+        }
     }
 
 }
