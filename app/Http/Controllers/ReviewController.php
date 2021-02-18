@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use App\Models\review;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -94,7 +93,7 @@ class ReviewController extends Controller
             'review' => 'required|string',
             'rating' => 'required|numeric|min:0|max:5',
         ]);
-
+        
         $review->review = $request->review;
         $review->rating = $request->rating;
         $review->save();

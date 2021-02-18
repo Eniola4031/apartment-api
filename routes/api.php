@@ -33,9 +33,10 @@ use App\Http\Controllers\ReviewController;
     Route::post('/user/login',[AuthController::class, 'login'])->name('login');
     Route::post('/user/register',[AuthController::class, 'register'])->name('register');
     Route::get('/user/logout',[AuthController::class, 'logout'])->name('logout');
-    Route::apiResource('/apartment',[ApartmentController::class])->name('apartment');
-    Route::apiResource('/apartments/reviews',[ReviewController::class, 'reviews'])->name('reviews');
-
+    Route::apiResources([
+        'apartment' => ApartmentController::class,
+        'review' => ReviewController::class,
+    ]);
 
 
 

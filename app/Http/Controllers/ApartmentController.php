@@ -74,7 +74,7 @@ class ApartmentController extends Controller
     {
         $apartment->load(['reviews' => function ($query) {
             $query->latest();
-        }, 'user']);
+     }, 'user']);
         return response()->json(['apartment' => $apartment]);
 
     }
