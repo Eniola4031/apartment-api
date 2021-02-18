@@ -18,7 +18,6 @@ class CreateApartmentsTable extends Migration
             $table->string('name');
             $table->longText('description');
             $table->decimal('price');
-            //$table->foreignId('user_id')->constrained('users');
             $table->foreignId('landlord_id')->constrained('landlords');
             $table->timestamps();
 

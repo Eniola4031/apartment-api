@@ -13,6 +13,7 @@ class LandlordFactory extends Factory
      * @var string
      */
     protected $model = landlord::class;
+    
 
     /**
      * Define the model's default state.
