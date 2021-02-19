@@ -29,11 +29,11 @@ Apartment API  is a Laravel powered API that allows users to add, view, update a
 ## API Endpoints
 Method | Route | Description
 --- | --- | ---
-`POST` | `/api/register` | Create a user
-`POST` | `/api/login` | Login an already registered user
-`GET` | `/api/user/apartments` | View all apartments
+`POST` | `/api/user/register` | Create a user
+`POST` | `/api/user/login` | Login an already registered user
+`GET` | `/api/apartments` | View all apartments
 `GET` | `/api/apartments/:id` | View a single property
-`POST` | `/api/apartments/:apartmentId/reviews` | Create a review for an apartment
+`POST` | `/api/reviews` | Create a review for an apartment
 
 ## Setup
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
