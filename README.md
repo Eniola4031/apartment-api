@@ -11,7 +11,6 @@ Apartment API  is a Laravel powered API that allows users to add, view, update a
 3. <a href="#api-endpoints">API Endpoints</a>
 4. <a href="#setup">Setup</a>
 5. <a href="#author">Author</a>
-6. <a href="#license">License</a>
 
 ## Technology Stack
   - [PHP](https://www.php.net)
